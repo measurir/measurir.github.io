@@ -4,7 +4,7 @@ const siteMetadata = {
   author: 'Mansour Fadaei',
   headerTitle: 'Mansour Fadaei Blog',
   description: 'A blog for measurment',
-  language: 'en-us',
+  language: 'fa',
   theme: 'system', // system, dark or light
   siteUrl: 'https://measur.ir',
   siteRepo: '',
