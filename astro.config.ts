@@ -40,12 +40,12 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Vazirmatn',
-      cssVariable: '--font-vazirmatn',
-      //weights: ['100 900'],
-      //styles: ['normal'],
-      //subsets: ['latin'],
-      //fallbacks: ['sans-serif'],
+      name: 'Inter',
+      cssVariable: '--font-inter',
+      weights: ['100 900'],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['Vazirmatn'],
     },
   ],
 
