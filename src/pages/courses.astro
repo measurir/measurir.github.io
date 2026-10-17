@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { courses, categories } from '../data/courses';
+---
+
+<BaseLayout
+  title="دوره‌های آموزشی | ژئولب"
+  description="لیست کامل دوره‌های تخصصی آزمون بتن، سنگدانه، NDT و ژئوتکنیک"
+>
+  <Header slot="header" />
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>دوره‌های آموزشی ژئولب</h1>
+      <p>
+        کاتالوگ دوره‌های آموزشی سال ۱۴۰۴ — از سطح پایه تا پیشرفته
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="filters" id="filters">
+        {categories.map((cat, i) => (
+          <button
+            class:list={['filter-btn', { active: i === 0 }]}
+            data-category={cat.id}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
+      <div class="course-list" id="courseList">
+        {courses.map((course) => (
+          <article
+            class="course-item card"
+            id={course.id}
+            data-category={course.category}
+          >
+            <div class="course-item-header">
+              <div>
+                <span class="code">{course.code}</span>
+                <span class={`badge badge-${course.level}`}>{course.levelLabel}</span>
+              </div>
+            </div>
+            <h2>{course.title}</h2>
+            <p class="desc">{course.description}</p>
+            {course.audience && (
+              <p class="audience">
+                <strong>مخاطبان:</strong> {course.audience}
+              </p>
+            )}
+            <a href="/contact" class="btn btn-primary mt-2">درخواست ثبت‌نام</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(135deg, #0a3d3d, #0d6e6e);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-hero p {
+    opacity: 0.9;
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: white;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--color-text-muted);
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+  }
+
+  .course-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .course-item {
+    padding: 1.75rem;
+  }
+
+  .course-item.hidden {
+    display: none;
+  }
+
+  .course-item-header {
+    margin-bottom: 0.75rem;
+  }
+
+  .course-item-header > div {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .code {
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .course-item h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .desc {
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .audience {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.course-item');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.getAttribute('data-category');
+
+      items.forEach((item) => {
+        if (cat === 'all' || item.getAttribute('data-category') === cat) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
