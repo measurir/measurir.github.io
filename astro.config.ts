@@ -39,13 +39,13 @@ export default defineConfig({
   // consumed through the `--font-inter` CSS variable in CustomStyles.astro.
   fonts: [
     {
-      provider: fontProviders.fontsource(),
-      name: 'Inter',
-      cssVariable: '--font-inter',
-      weights: ['100 900'],
-      styles: ['normal'],
-      subsets: ['latin'],
-      fallbacks: ['sans-serif'],
+      provider: fontProviders.google(),
+      name: 'Vazirmatn',
+      //cssVariable: '--font-inter',
+      //weights: ['100 900'],
+      //styles: ['normal'],
+      //subsets: ['latin'],
+      //fallbacks: ['sans-serif'],
     },
   ],
 
